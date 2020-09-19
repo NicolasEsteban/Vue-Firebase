@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="dark" variant="primary">
             <b-container>
                
-               <b-navbar-brand :to="{name: 'Home'}" > <h5> MyApp </h5></b-navbar-brand>
+               <b-navbar-brand :to="{name: 'Home'}" > <h5> Login </h5></b-navbar-brand>
              
                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
                
