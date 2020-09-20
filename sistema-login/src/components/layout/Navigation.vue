@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="dark" variant="primary">
             <b-container>
                
-               <b-navbar-brand :to="{name: 'Home'}" > <h5> Login </h5></b-navbar-brand>
+               <b-navbar-brand :to="{name: 'Home'}" > <h5> Sesion </h5></b-navbar-brand>
              
                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
                
@@ -12,9 +12,9 @@
                            <template v-if="user">
                                 <b-nav-item-dropdown right>
                                     <template v-slot:button-content>
-                                        <em>{{user.displayName}}</em>
+                                        <em>{{user.displayName || user.email}}</em>
                                     </template>
-                                    <b-dropdown-item href="#">Dashboard</b-dropdown-item>
+                                    <b-dropdown-item :to="{name: 'dashboard'}">Index</b-dropdown-item>
                                     <b-dropdown-item @click.prevent="logout">Cerrar sesion</b-dropdown-item>
                                 </b-nav-item-dropdown>
                            </template>

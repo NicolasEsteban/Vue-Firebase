@@ -6,6 +6,9 @@
 
 <script>
 export default {
-    name: 'Dashboard'
+    name: 'Dashboard',
+    created() {
+        console.log('instancia');
+    },
 }
 </script>

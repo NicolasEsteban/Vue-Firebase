@@ -3,7 +3,7 @@
         <b-row >
             <b-col class="mx-auto">
                 <b-card >
-                    <h3 class="tittle is-3 text-center">Iniciar Secion</h3>
+                    <h3 class="tittle is-3 text-center">Iniciar Sesion</h3>
 
                     <b-form @submit="onLogin" >
 
