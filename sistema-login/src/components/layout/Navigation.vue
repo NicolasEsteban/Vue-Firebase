@@ -9,9 +9,19 @@
                
                    <b-collapse id="nav-collapse" is-nav>
                        <b-navbar-nav class="ml-auto" >
+                           <template v-if="user">
+                                <b-nav-item-dropdown right>
+                                    <template v-slot:button-content>
+                                        <em>{{user.displayName}}</em>
+                                    </template>
+                                    <b-dropdown-item href="#">Dashboard</b-dropdown-item>
+                                    <b-dropdown-item @click.prevent="logout">Cerrar sesion</b-dropdown-item>
+                                </b-nav-item-dropdown>
+                           </template>
+                           <template v-else>
                             <b-button variant="success" class="mr-1" :to="{name: 'login'} "  >Iniciar sesion</b-button>
                             <b-button variant="light"  class="mr-1" :to="{name: 'register'}"  >Registrarse</b-button>
-                                                
+                           </template>                   
                        </b-navbar-nav>
                     </b-collapse>
                
@@ -22,6 +32,35 @@
         
     </div>
 </template>
+
+<script>
+
+import firebase from 'firebase/app';
+
+export default {
+    data() {
+        return {
+            user: null
+        }
+    },
+    methods: {
+        logout(){
+            firebase.auth().signOut().then(()=>{
+                this.$router.push({name: 'login'});
+            });
+        }
+    },
+    created() {
+        firebase.auth().onAuthStateChanged(user=>{ // para obtener datos usuario logeado
+            if(user){
+                this.user = user;
+            }else{
+                this.user = null;
+            }
+        })
+    },
+}
+</script>
 
 
 

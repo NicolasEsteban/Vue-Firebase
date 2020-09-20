@@ -37,10 +37,21 @@
                 </b-card>
             </b-col>
         </b-row>
+
+        <br>
+        <div>
+            <b-alert show variant="danger" dismissible v-if="error">{{error}}
+                
+            </b-alert>
+        </div>
     </div>   
 </template>
 
 <script>
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default {
     data(){
       return {
@@ -52,8 +63,19 @@ export default {
     name: 'Login',
     methods: {
         onLogin(){
-            console.log(this.email);
-            console.log(this.contraseña);
+            this.error =''
+            if(this.email && this.contraseña){
+                firebase.auth().signInWithEmailAndPassword(this.email,this.contraseña)
+                .then(user =>{
+                    this.$router.push({name: 'dashboard'});
+                    user;
+                }).catch(err =>{
+                    this.error = err.message;
+                });
+            }else{
+                this.error = "Campos requeridos";
+            }
+
         }
     },
 }

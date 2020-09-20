@@ -87,10 +87,24 @@ export default {
                // se envian datos a firebase
                firebase.auth().createUserWithEmailAndPassword(this.email,this.contraseña) 
                 .then(user =>{
-                    this.nombre ='';
-                    this.contraseña='';
-                    this.email='';
-                    console.log(user);
+                    if(user){ // para agregar nombre del usuario
+                        user.user.updateProfile({
+                            displayName: this.nombre
+                        }).then((u)=>{
+
+                            this.nombre ='';
+                            this.contraseña='';
+                            this.email='';
+                            console.log(u);
+                            this.$router.push({name: 'dashboard'});
+
+                        }).catch((err)=>{
+                            this.error = err.message;
+                        });
+                    }
+
+                    
+                    //console.log(user);
 
                 }).catch(error=>{
                     this.error = error.message;

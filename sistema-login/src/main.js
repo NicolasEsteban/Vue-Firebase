@@ -30,9 +30,17 @@ firebase.initializeApp(firebaseConfig);
 // se exporta variable con configuracion de base de datos
 export const db = firebase.firestore();
 
+
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+let app = null
+
+firebase.auth().onAuthStateChanged(()=>{ // para evitar que se creen multiples 
+  if(!app){                              // instancias de la aplicacion
+    app = new Vue({
+      router,
+      render: h => h(App)
+    }).$mount('#app')    
+  }
+})
+
