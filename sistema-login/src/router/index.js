@@ -43,7 +43,6 @@ const router = new VueRouter({
 
 router.beforeEach((to,from,next)=>{ // funcion que sirve para proteger las rutas
   if(to.matched.some(ruta => ruta.meta.requiresAuth)){
-    const user = firebase.auth().currentUser; // se extrae el usuario logeado
     if(user){
       next();
     }else{
